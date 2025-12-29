@@ -21,11 +21,11 @@ namespace GameLauncher
         public MainWindow()
         {
             InitializeComponent();
-
             // Load games from JSON and set as ItemsSource for gameListControl
-            if (File.Exists("games.json"))
+            if (File.Exists("data/games.json"))
             {
-                List<GameItem> games = JsonConvert.DeserializeObject<List<GameItem>>(File.ReadAllText("games.json"));
+                var json = File.ReadAllText("data/games.json");
+                var games = JsonConvert.DeserializeObject<List<GameItem>>(json) ?? new List<GameItem>();
                 gameListControl.ItemsSource = games;
             }
         }
@@ -37,7 +37,7 @@ namespace GameLauncher
                 // Háttérkép váltása
                 if (!string.IsNullOrEmpty(game.BackgroundImage) && File.Exists(game.BackgroundImage))
                 {
-                    MainContentGrid.Background = new ImageBrush
+                    mainContentGrid.Background = new ImageBrush
                     {
                         ImageSource = new BitmapImage(new Uri(game.BackgroundImage, UriKind.RelativeOrAbsolute)),
                         Stretch = Stretch.UniformToFill
@@ -45,7 +45,7 @@ namespace GameLauncher
                 }
 
                 // Ha később kell:
-                // selectedGame = game;
+                var selectedGame = game;
             }
         }
 

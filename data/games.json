@@ -2,13 +2,13 @@
   {
     "Title": "The Witcher 3",
     "ExePath": "C:\\Games\\Witcher3\\bin\\x64\\witcher3.exe",
-    "BackgroundImage": "witcher3bg.jpg",
+    "BackgroundImage": "assets/witcher3bg.jpg",
     "Notes": "Összegyűjteni a nagymesteri szetteket."
   },
   {
     "Title": "Skyrim",
     "ExePath": "C:\\Games\\Skyrim\\SkyrimSE.exe",
-    "BackgroundImage": "skyrimbg.jpg",
+    "BackgroundImage": "assets/skyrimbg.jpg",
     "Notes": "Leigázni Alduint végre."
   }
 ]

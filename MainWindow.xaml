@@ -5,43 +5,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Title="RPG Launcher" Height="500" Width="900">
-    <Grid x:Name="MainContentGrid">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.ColumnSpan="2" 
-               Source="{Binding SelectedItem.BackgroundImage, ElementName=gameListControl}" 
-               Stretch="UniformToFill" Opacity="0.4"/>
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="BurlyWood">
+            <ItemsControl x:Name="gameListControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Title}"
+                                Margin="5"
+                                Padding="10"
+                                Click="GameButton_Click"
+                                Tag="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
 
-        <ListBox x:Name="gameListControl" Grid.Column="0"
-                 Background="Gainsboro">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Button
-                        Content="{Binding Title}"
-                        Margin="5"
-                        Padding="10"
-                        Click="GameButton_Click"
-                        Tag="{Binding}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <StackPanel Grid.Column="1" Margin="30" VerticalAlignment="Center">
-            <TextBlock Text="{Binding SelectedItem.Title, ElementName=gameListControl}" 
-                       FontSize="40" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
-
-            <TextBlock Text="Kalandnapló:" Foreground="#FFBBBBBB" Margin="0,0,0,5"/>
-            <TextBox Text="{Binding SelectedItem.Notes, ElementName=gameListControl, UpdateSourceTrigger=PropertyChanged}" 
-                     Height="120" AcceptsReturn="True" Background="#A6FFFFFF" 
-                     Padding="10" VerticalScrollBarVisibility="Auto"/>
-
-            <Button Content="INDÍTÁS" Margin="0,20,0,0" Width="200" Height="50" 
-                    Click="LaunchGame_Click" 
-                    Tag="{Binding SelectedItem.ExePath, ElementName=gameListControl}"
-                    Background="#FF2D2D2D" Foreground="White" Cursor="Hand"/>
-        </StackPanel>
+        <!-- main content -->
+        <Grid Grid.Column="1" x:Name="mainContentGrid" Background="Beige">
+            <TextBlock Text="Select a game from the sidebar to see details."
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Foreground="Gray" />
+            <ItemsControl>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </Grid>
 </Window>
