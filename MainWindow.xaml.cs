@@ -34,7 +34,7 @@ namespace GameLauncher
         {
             if (sender is Button button && button.Tag is GameItem game)
             {
-                // Háttérkép váltása
+                // Háttér váltása
                 if (!string.IsNullOrEmpty(game.BackgroundImage) && File.Exists(game.BackgroundImage))
                 {
                     mainContentGrid.Background = new ImageBrush
@@ -43,7 +43,19 @@ namespace GameLauncher
                         Stretch = Stretch.UniformToFill
                     };
                 }
-
+                // Notes mutatása
+                if (!string.IsNullOrEmpty(game.Notes))
+                {
+                    titleTextBlock.Text = game.Title;
+                    notesTextBlock.Text = game.Notes;
+                    launchGameButton.Content = $"Indítás: {game.Title}";
+                }
+                else
+                {
+                    titleTextBlock.Text = "Válassz egy játékot";
+                    notesTextBlock.Text = "Nincsenek megjegyzések...";
+                }
+                // toggle btn kéne? Active-ot kell kiemelni csak
                 // Ha később kell:
                 var selectedGame = game;
             }

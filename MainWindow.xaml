@@ -28,17 +28,21 @@
 
         <!-- main content -->
         <Grid Grid.Column="1" x:Name="mainContentGrid" Background="Beige">
-            <TextBlock Text="Select a game from the sidebar to see details."
+            <TextBlock x:Name="titleTextBlock"
+                       FontSize="20"
+                       FontWeight="Bold" />
+            <TextBlock x:Name="notesTextBlock"
+                       Text="Select a game from the sidebar to see details."
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="16"
-                       Foreground="Gray" />
-            <ItemsControl>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                       Foreground="Gray"
+                       TextWrapping="Wrap" />
+            <Button x:Name="launchGameButton"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Content=""
+                    Click="LaunchGame_Click" />
         </Grid>
     </Grid>
 </Window>
