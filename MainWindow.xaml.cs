@@ -8,17 +8,55 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using System.IO;
+using System.Collections.Generic;
+
 
 namespace GameLauncher
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+
+            // Load games from JSON and set as ItemsSource for gameListControl
+            if (File.Exists("games.json"))
+            {
+                List<GameItem> games = JsonConvert.DeserializeObject<List<GameItem>>(File.ReadAllText("games.json"));
+                gameListControl.ItemsSource = games;
+            }
         }
+
+        private void LaunchGame_Click(object sender, RoutedEventArgs e)
+        {
+            // A gomb 'Tag' tulajdonságából olvassuk ki az útvonalat
+            if (sender is Button button && button.Tag != null)
+            {
+                string gamePath = button.Tag.ToString();
+
+                try
+                {
+                    Process.Start(new ProcessStartInfo(gamePath) { UseShellExecute = true });
+                    // Opcionálisan minimalizálhatjuk az appot indításkor
+                    // this.WindowState = WindowState.Minimized;
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Hiba a játék indításakor: {ex.Message}", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+    }
+
+    public class GameItem
+    {
+        public string Title { get; set; }
+        public string ExePath { get; set; }
+        public string BackgroundImage { get; set; }
+        public string Notes { get; set; }
     }
 }

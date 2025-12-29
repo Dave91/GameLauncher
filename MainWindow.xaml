@@ -1,12 +1,42 @@
 ﻿<Window x:Class="GameLauncher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GameLauncher"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="RPG Launcher" Height="500" Width="900">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <Image Grid.ColumnSpan="2" 
+               Source="{Binding SelectedItem.BackgroundImage, ElementName=gameListControl}" 
+               Stretch="UniformToFill" Opacity="0.4"/>
+
+        <ListBox x:Name="gameListControl" Grid.Column="0" 
+                 Background="#CC000000" Foreground="White" BorderBrush="Transparent">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" FontSize="18" Padding="10"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" Margin="30" VerticalAlignment="Center">
+            <TextBlock Text="{Binding SelectedItem.Title, ElementName=gameListControl}" 
+                       FontSize="40" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Kalandnapló:" Foreground="#FFBBBBBB" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding SelectedItem.Notes, ElementName=gameListControl, UpdateSourceTrigger=PropertyChanged}" 
+                     Height="120" AcceptsReturn="True" Background="#A6FFFFFF" 
+                     Padding="10" VerticalScrollBarVisibility="Auto"/>
+
+            <Button Content="INDÍTÁS" Margin="0,20,0,0" Width="200" Height="50" 
+                    Click="LaunchGame_Click" 
+                    Tag="{Binding SelectedItem.ExePath, ElementName=gameListControl}"
+                    Background="#FF2D2D2D" Foreground="White" Cursor="Hand"/>
+        </StackPanel>
     </Grid>
 </Window>
