@@ -30,6 +30,27 @@ namespace GameLauncher
             }
         }
 
+        private void GameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is GameItem game)
+            {
+                // Háttérkép váltása
+                if (!string.IsNullOrEmpty(game.BackgroundImage) && File.Exists(game.BackgroundImage))
+                {
+                    MainContentGrid.Background = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri(game.BackgroundImage, UriKind.RelativeOrAbsolute)),
+                        Stretch = Stretch.UniformToFill
+                    };
+                }
+
+                // Ha később kell:
+                // selectedGame = game;
+            }
+        }
+
+
+
         private void LaunchGame_Click(object sender, RoutedEventArgs e)
         {
             // A gomb 'Tag' tulajdonságából olvassuk ki az útvonalat

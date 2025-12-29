@@ -5,9 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Title="RPG Launcher" Height="500" Width="900">
-    <Grid>
+    <Grid x:Name="MainContentGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -15,11 +15,16 @@
                Source="{Binding SelectedItem.BackgroundImage, ElementName=gameListControl}" 
                Stretch="UniformToFill" Opacity="0.4"/>
 
-        <ListBox x:Name="gameListControl" Grid.Column="0" 
-                 Background="#CC000000" Foreground="White" BorderBrush="Transparent">
+        <ListBox x:Name="gameListControl" Grid.Column="0"
+                 Background="Gainsboro">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" FontSize="18" Padding="10"/>
+                    <Button
+                        Content="{Binding Title}"
+                        Margin="5"
+                        Padding="10"
+                        Click="GameButton_Click"
+                        Tag="{Binding}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
