@@ -40,20 +40,37 @@ namespace GameLauncher
                     mainContentGrid.Background = new ImageBrush
                     {
                         ImageSource = new BitmapImage(new Uri(game.BackgroundImage, UriKind.RelativeOrAbsolute)),
-                        Stretch = Stretch.UniformToFill
+                        Stretch = Stretch.UniformToFill,
                     };
+                    mainContentGrid.Background.BeginAnimation(
+                        ImageBrush.OpacityProperty, new System.Windows.Media.Animation.DoubleAnimation(0, 1, new Duration(TimeSpan.FromSeconds(0.5)))
+                    );
                 }
                 // Notes mutatása
                 if (!string.IsNullOrEmpty(game.Notes))
                 {
                     titleTextBlock.Text = game.Title;
                     notesTextBlock.Text = game.Notes;
-                    launchGameButton.Content = $"Indítás: {game.Title}";
+                    var launchGameButton = new Button
+                    {
+                         Content = $"Indítás: {game.Title}",
+                         Width = 200,
+                         Height = 50,
+                    };
+                    if (mainContentGrid.Children.Contains(launchGameButton))
+                    {
+                        mainContentGrid.Children.Remove(launchGameButton);
+                    }
+                    else
+                    {
+                        mainContentGrid.Children.Add(launchGameButton);
+                        launchGameButton.Click += LaunchGame_Click;
+                    }
                 }
                 else
                 {
-                    titleTextBlock.Text = "Válassz egy játékot";
-                    notesTextBlock.Text = "Nincsenek megjegyzések...";
+                    titleTextBlock.Text = "";
+                    notesTextBlock.Text = "";
                 }
                 // toggle btn kéne? Active-ot kell kiemelni csak
                 // Ha később kell:
