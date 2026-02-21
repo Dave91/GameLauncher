@@ -33,6 +33,9 @@
             <TextBlock x:Name="titleTextBlock"
                        FontSize="20"
                        FontWeight="Bold"
+                       Background="Black"
+                       Foreground="White"
+                       Opacity="0.8"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Margin="25"/>
@@ -48,7 +51,7 @@
                        VerticalAlignment="Bottom"
                        FontSize="16"
                        Background="Transparent"
-                       Foreground="Gray"
+                       Foreground="White"
                        TextWrapping="Wrap"
                        Margin="25"/>
         </Grid>

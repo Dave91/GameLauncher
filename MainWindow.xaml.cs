@@ -24,9 +24,9 @@ namespace GameLauncher
             // JSON > GameItem > gameListControl
             var baseDir = AppDomain.CurrentDomain.BaseDirectory;
             var jsonPath = System.IO.Path.Combine(baseDir, "data", "games.json");
-            if (File.Exists(jsonPath)) // "data/games.json"
+            if (File.Exists(jsonPath))
             {
-                var json = File.ReadAllText(jsonPath); // "data/games.json"
+                var json = File.ReadAllText(jsonPath);
                 var games = JsonConvert.DeserializeObject<List<GameItem>>(json) ?? new List<GameItem>();
                 gameListControl.ItemsSource = games;
             }
@@ -36,7 +36,7 @@ namespace GameLauncher
         {
             if (sender is Button button && button.Tag is GameItem game)
             {
-                // Háttér
+                // Bg image
                 if (!string.IsNullOrEmpty(game.BackgroundImage) && File.Exists(game.BackgroundImage))
                 {
                     mainContentGrid.Background = new ImageBrush
@@ -55,8 +55,8 @@ namespace GameLauncher
                     titleTextBlock.Text = game.Title;
                     notesTextBlock.Text = game.Notes;
                 }
-                //titleTextBlock.Text = "";
-                // Launch gomb (ha van exePath)
+                // titleTextBlock.Text = "";
+                // Launch btn
                 if (!string.IsNullOrEmpty(game.ExePath))
                 {
                     launchGameButton.Content = $"Indítás: {game.Title}";
@@ -64,15 +64,14 @@ namespace GameLauncher
                     launchGameButton.Tag = game.ExePath;
                     launchGameButton.Visibility = Visibility.Visible;
                 }
-                // toggle btn kéne? Active-ot kell kiemelni csak
-                // Ha később kell:
+                // for future use:
                 // selectedGame = game;
             }
         }
 
         private void LaunchGame_Click(object sender, RoutedEventArgs e)
         {
-            // A gomb 'Tag' > gamePath
+            // btn 'Tag' > gamePath
             if (sender is Button button && button.Tag != null)
             {
                 string gamePath = button.Tag.ToString();
@@ -80,7 +79,7 @@ namespace GameLauncher
                 try
                 {
                     Process.Start(new ProcessStartInfo(gamePath) { UseShellExecute = true });
-                    // Opcionálisan minimalizálhatjuk az appot indításkor
+                    // minimize/close launcher on app start
                     // this.WindowState = WindowState.Minimized;
                     this.Close();
                 }
