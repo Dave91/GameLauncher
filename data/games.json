@@ -10,5 +10,29 @@
     "ExePath": "C:\\Games\\Skyrim\\SkyrimSE.exe",
     "BackgroundImage": "assets/skyrimbg.jpg",
     "Notes": "Leigázni Alduint végre."
+  },
+  {
+    "Title": "Grim Dawn",
+    "ExePath": "C:\\Games\\GrimDawn\\GrimDawn.exe",
+    "BackgroundImage": "assets/gdbg.jpg",
+    "Notes": "Újra végigjátszani a játékot, de most egy új builddel."
+  },
+  {
+    "Title": "DragonAge: Origins",
+    "ExePath": "C:\\Games\\DragonAgeOrigins\\DragonAgeOrigins.exe",
+    "BackgroundImage": "assets/daobg.jpg",
+    "Notes": "Újra végigjátszani a játékot, de most egy új builddel."
+  },
+    {
+    "Title": "Mass Effect: Legendary Edition",
+    "ExePath": "C:\\Games\\MassEffectLegendaryEdition\\MassEffectLE.exe",
+    "BackgroundImage": "assets/melebg.jpg",
+    "Notes": "Új modokat gyűjteni."
+  },
+  {
+    "Title": "The Witcher 2",
+    "ExePath": "C:\\Games\\Witcher2\\Witcher2.exe",
+    "BackgroundImage": "assets/witcher2bg.jpg",
+    "Notes": "Újra végigjátszani a játékot, de most egy új builddel."
   }
 ]
